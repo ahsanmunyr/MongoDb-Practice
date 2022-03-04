@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../layouts/head'); %>
+  </head>
+  <body class="container">
+    <!-- <header>
+     <%- include('../layouts/header'); %>
+ </header> -->
+
+    <main>
+      <div class="jumbotron">
+        <h1>ERROR!</h1>
+        <% for(var index=0; index< errorBags.length; index++){ %>
+        <p><%= errorBags[index].message %></p>
+        <%}%>
+      </div>
+    </main>
+
+    <footer><%- include('../layouts/footer'); %></footer>
+  </body>
+</html>

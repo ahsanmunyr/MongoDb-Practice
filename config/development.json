@@ -1,0 +1,8 @@
+{
+    "DB": "mongodb://localhost/test-db",
+    "origin": "http://localhost:8000",
+    "g-callback": "http://localhost:8000/api/social/auth/google/callback",
+    "db": {
+        "name": "development"
+    }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head'); %>
+</head>
+
+<body class="container">
+
+    <!-- <header>
+     <%- include('../layouts/header'); %>
+ </header> -->
+    <style>
+        .facebook {
+            background-color: #3b5998 !important;
+            color: #fff !important;
+        }
+
+        .fa-facebook-f:before,
+        .fa-facebook:before {
+            content: "\f09a";
+        }
+    </style>
+
+    <div class="container">
+        <div class="jumbotron text-center text-primary">
+            <h1><span class="fa fa-lock"></span> Social Authentication</h1>
+            <a href="/api/social/auth/google" class="btn btn-danger"><span class="fa fa-google"></span> Sign In with
+                Google</a>
+            <!-- <a href="/auth/facebook" class="btn btn-success facebook"><span class="fa fa-facebook"></span> Sign In with Facebook</a> -->
+        </div>
+    </div>
+    <footer>
+        <%- include('../layouts/footer'); %>
+    </footer>
+
+</body>
+
+</html>

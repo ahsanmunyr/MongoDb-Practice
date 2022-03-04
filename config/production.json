@@ -1,0 +1,7 @@
+{
+    "origin": "mongodb+srv://farooq:khan@cluster0.w9wcb.mongodb.net/test",
+    "front": "https://students.minnesotarealtyschool.com",
+    "db": {
+        "name": "production"
+    }
+}

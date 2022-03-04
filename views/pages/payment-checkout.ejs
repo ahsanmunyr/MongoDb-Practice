@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Shwopp | Checkout</title>
+    <style>
+        .stripe-button-el {
+            background: #f60386;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            margin-top: 10px;
+        }
+        
+        .stripe-button-el span {
+            background: #f60386;
+            color: #fff;
+            text-shadow: none;
+            border-radius: 0px;
+            border: none;
+            text-transform: uppercase;
+            font-family: Montserrat-Regular;
+            box-shadow: none;
+            font-size: 16px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body class="container">
+
+    <!-- <header>
+     <%- include('../layouts/header'); %>
+ </header> -->
+    <!-- Latest compiled and minified CSS -->
+    <main>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+        <style>
+            body {
+                font-family: 'Helvetica Neue', Helvetica, "Segoe UI", Arial, sans-serif;
+                font-size: 13px;
+            }
+        </style>
+
+        <div class="container" style="margin-top: 40px;">
+            <div class="row">
+                <div class="col-md-6 col-xs-6">Shwopp, 2021</div>
+                <div class="col-md-6 col-xs-6" style="text-align: right;">Date :
+                    <%=
+                        moment(transaction.createdAt).format("LLLL") %>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 60px;">
+            <div class="row">
+                <div class="col-md-7 col-xs-7" style="text-align: right;">
+                    <img src="/resources-images/logo.png" alt="" />
+                </div>
+                <div class="col-md-5 col-xs-5" style="text-align: right; padding-top: 20px;">
+                    <div style="font-size: 18px; font-weight: bold; padding-bottom: 6px;"> Michael Braenon</div>
+                    <div style="padding-bottom: 6px;"> MN Department of Commerce, 85E 7th Place, Suite 500</div>
+                    <div> MN 55015</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 60px;">
+            <div class="row">
+                <div style="text-align: center; font-size: 30px; font-weight: 300; letter-spacing: 3;"> TRANSACTION RECEIPT
+                </div>
+                <div style="text-align: center; font-size: 16px; font-weight: 500; letter-spacing: 1;">
+                    <%if(transaction.payment.method=='credit_card'){__append('Credit Card')}else
+                        if(transaction.payment.method=='cheque' ){__append('Cheque')}else{__append('Cash')}%> Payment
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 60px;">
+            <div class="row">
+                <div class="title-section" style="font-size: 16px; letter-spacing: 1; border-bottom: 2px #666666 solid; padding-bottom: 10px;">
+                    RECEPIENT DETAILS </div>
+                <table style="width: 100%; margin-top: 20px;">
+                    <thead style="letter-spacing: 1; font-weight: 300;">
+                        <tr>
+                            <td style="padding: 10px 0;"> NAME </td>
+                            <td style="text-align: center;"> SSN (Last 4 Digits)</td>
+                            <td style="text-align: right;"> PHONE NUMBER </td>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 22px;">
+                        <tr>
+                            <td>
+                                <%= transaction.user.firstName %>
+                                    <% if(transaction.user.middleName){%>
+                                        <%=transaction.user.middleName%>
+                                            <%}%>
+                                                <%= transaction.user.lastName %>
+                            </td>
+                            <td style="text-align: center;">
+                                <%= transaction.user.ssn %>
+                            </td>
+                            <td style="text-align: right;">
+                                <%= transaction.user.phoneNo %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 60px;">
+            <div class="row">
+                <div class="title-section" style="font-size: 16px; letter-spacing: 1; border-bottom: 2px #666666 solid; padding-bottom: 10px;">
+                    TRANSACTION DETAILS FOR
+                    <%if(transaction.type=='registration'){
+                    __append('COURSE REGISTRATION')
+                }else{
+                    __append('BOOKS SHIPPING')
+                }%>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-6 col-xs-6">
+                        <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> DATE & HOUR </div>
+
+                        <div style="font-size: 22px; ">
+                            <%=moment(transaction.createdAt).format('LLLL')%>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-6 col-xs-6" style="text-align: right;">
+                        <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> COURSES </div>
+                        <%for(var index=0;index<transaction.course.length; index++){ 
+                            __append('<div style="font-size: 22px;">');__append(transaction.course[index].code);__append(" ");__append(transaction.course[index].title);__append('</div>')
+                        }%>
+
+                    </div>
+                    <hr>
+                </div>
+                <hr style="border-top: 1px solid #666666;">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-6 col-xs-6">
+                        <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> TRANSACTION AMOUNT </div>
+                        <div style="font-size: 22px;"> $
+                            <%=transaction.payment.amount%>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <hr style="border-top: 1px solid #666666;">
+            </div>
+        </div>
+
+        <%if(transaction.paid == false){
+        %>
+            <form action="/pay" method="post">
+                <input type="hidden" name="transaction" value="<%=transaction._id%>">
+                <input type="hidden" name="is_submit" value="1">
+                <input type="hidden" name="type" value="<%=transaction.type%>">
+                <input type="hidden" name="token" value="<%=token%>">
+                <input type="hidden" name="amount" value="<%=transaction.payment.amount%>">
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="<%=stripe_pk%>" data-amount="<%=transaction.payment.amount*100%>" data-name="Shwopp" data-email="" data-description="<%=transaction.type%> purchase"
+                    data-label="Checkout" data-currency='usd' data-image="/resources-images/logo.png" data-locale="auto"></script>
+            </form>
+            <%
+        }else{
+            %>
+                <div class="container" style="margin-top: 50px; font-weight: 300;">
+                    <div class="col-md-12" style="text-align: center;">
+                        <div> This transaction has already been marked as completed. </div>
+                        <div> It can be used as a payment reciept </div>
+                        <div> Transaction ID:
+                            <%=transaction.payment.transaction_id%>
+                        </div>
+                    </div>
+                </div>
+                <%
+        }%>
+                    <div class="container" style="margin-top: 50px; font-weight: 300;">
+                        <div class="col-md-12" style="text-align: center;">
+                            <div> The transaction shown on your recepit is correct at the time of downloading. </div>
+                            <div> If you think something is incorrect, please contact us. </div>
+                        </div>
+                    </div>
+
+    </main>
+    <footer>
+        <%- include('../layouts/footer'); %>
+    </footer>
+</body>
+
+</html>

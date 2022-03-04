@@ -1,0 +1,11 @@
+{
+    "JWT": {
+        "EXPIRE_NUM": 48,
+        "EXPIRE_VALUE": "hours"
+    },
+    "ACCESS_TOKEN": {
+        "EXPIRE_NUM": 1,
+        "EXPIRE_VALUE": "hours"
+    },
+    "jwtprivatekey": "privateKey"
+}
